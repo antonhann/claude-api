@@ -41,6 +41,22 @@ async def initiateConversation():
         )
         print("Claude: ", aiResponse)
 
+"""
+Tasks:
+
+look into max history
+
+demo 
+
+image (text prompt, image prompt)
+
+look into functionality
+
+description customization of the bot
+
+generating image through a prompt
+"""
+
 if __name__ == "__main__":
     asyncio.run(initiateConversation())
 
