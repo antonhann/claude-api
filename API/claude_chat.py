@@ -42,6 +42,22 @@ async def initiateConversation():
         )
         print("Claude: ", aiResponse)
 
+"""
+Tasks:
+
+1.look into max history:
+Specifically, Claude models can process up to 100,000 tokens of text in a single context window
+This corresponds to approximately 75,000 words, which is equivalent to hundreds of pages of text .
+
+image (text prompt, image prompt)
+
+look into functionality
+
+description customization of the bot
+
+generating image through a prompt
+"""
+
 if __name__ == "__main__":
     asyncio.run(initiateConversation())
 
