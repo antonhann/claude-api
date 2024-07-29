@@ -44,7 +44,7 @@
   .chat-bar {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #000000;
     background-color: white;
     position: sticky;
     bottom: 0;
