@@ -1,14 +1,15 @@
 import asyncio
 from anthropic import AsyncAnthropic
-#API key taken from "echo $ANTHROPIC_API_KEY"
-#update key with "export ANTHROPIC_API_KEY="your_api_key""
+from API.config import ANTHROPIC_API_KEY
 
 #initalize AsyncAnthropic client
-client = AsyncAnthropic()
+client = AsyncAnthropic(api_key = ANTHROPIC_API_KEY)
 
 async def initiateConversation():
     #Store current conversation
     history = []
+
+    print("Claude: How can I assist you?")
 
     #initiate conversation
     while True:

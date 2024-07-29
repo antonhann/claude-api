@@ -35,7 +35,8 @@ def claude_chatbot(prompt: str, image: str) -> str:
     ],
     model="claude-3-haiku-20240307",
 )
-    print(message.content[0].text)
+    print(message)
+    #print(message.content[0].text)
 
 # def chatbot():
 #     print("Claude: Hello! How can I assist you today?")
@@ -54,7 +55,6 @@ def claude_chatbot(prompt: str, image: str) -> str:
 #     root.withdraw()  # Hide the root window
 #     file_path = filedialog.askopenfilename(
 #         title="Select an Image File",
-#         initialdir=os.path.expanduser("~/Downloads"),
 #         filetypes=[("All Files", "*.*")]
 #     )
 #     return file_path
