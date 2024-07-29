@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from anthropic import Anthropic
 
 app = Flask(__name__)
-mongoClient = MongoClient("mongodb+srv://stemkasa:Attest2020@cluster0.qd0gs.mongodb.net/test")
+mongoClient = MongoClient("")
 client = Anthropic()
 db = mongoClient["stemkasa"]
 
