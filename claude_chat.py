@@ -44,9 +44,9 @@ async def initiateConversation():
 """
 Tasks:
 
-look into max history
-
-demo 
+1.look into max history:
+Specifically, Claude models can process up to 100,000 tokens of text in a single context window
+This corresponds to approximately 75,000 words, which is equivalent to hundreds of pages of text .
 
 image (text prompt, image prompt)
 
