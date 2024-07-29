@@ -38,14 +38,14 @@ def getChatHistory(userId,botId):
             "FROM_USER_ID": userId,
             "BOT_ID": botId
         })
-        history = [serialize_document(document) for document in mongoHistory]
+        history = [serializeDocument(document) for document in mongoHistory]
         if history:
             return jsonify({"history" : history})
         else:
             return jsonify({"message": "couldnt find message"}), 400
 
 
-def serialize_document(doc):
+def serializeDocument(doc):
     """
     Convert MongoDB document to a JSON serializable format.
     """
