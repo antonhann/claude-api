@@ -2,38 +2,22 @@ import { useState } from 'react';
 import ChatSidebar from './Sidebar';
 import ChatWindow from './ChatWindow';
 import '../styles/ChatApp.css';
-import {Chat} from "../../interface"
+import {Chat, Conversation} from "../../interface"
 
 const ChatApp = () => {
-  const [chats, setChats] = useState<Chat[]>([]);
-  const [currentChatId, setCurrentChatId] = useState<number>(-1);
+  const [currentConvo, setCurrentConvo] = useState<Conversation | undefined>(undefined);
 
-  const handleNewChat = async () => {
+  const handleChatSelection = (currentConvo : Conversation) => {
+    setCurrentConvo(currentConvo);
   };
-
-  const handleChatSelection = (id : number) => {
-    setCurrentChatId(id);
-  };
-
-  const handleDeleteChat = (id : number) => {
-    setChats(chats.filter(chat => chat.CHAT_ID !== id));
-    if(currentChatId === id){
-        setCurrentChatId(-1);
-    }
-  }
-
-  const currentChat = chats.find(chat => chat.CHAT_ID === currentChatId);
 
   return (
     <div className="chat-app">
       <ChatSidebar
-        chats={chats}
-        currentChatId={currentChatId}
-        handleNewChat={handleNewChat}
         handleChatSelection={handleChatSelection}
-        handleDeleteChat={handleDeleteChat}
+        currentConvo = {currentConvo}
       />
-      <ChatWindow currentChat={currentChat} />
+      <ChatWindow currentChat={currentConvo} />
     </div>
   );
 };

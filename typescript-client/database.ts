@@ -1,6 +1,11 @@
 /*
     Questions:
     what is the purpose of the context in chat prompt 
+
+    Tasks:
+    -retrieve all user's unique chats
+    -post new chat
+    -creating new bot
 **/
 import { Chat, ClaudeChat } from "./interface";
 

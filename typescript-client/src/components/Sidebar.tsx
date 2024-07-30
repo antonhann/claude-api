@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Sidebar.css';
-import { Chat } from '@interfaces/*';
+import { Chat, Conversation} from '@interfaces/*';
 interface SidebarProps {
-    chats: Chat[];
-    currentChatId: number | null; 
-    handleNewChat: () => void;
-    handleChatSelection: (chatId: number) => void;
-    handleDeleteChat: (chatId: number) => void;
+    handleChatSelection: (currentConvo : Conversation) => void;
+    currentConvo : Conversation | undefined;
 }
 const Sidebar : React.FC<SidebarProps>= ({
-    chats,
-    currentChatId,
-    handleNewChat,
     handleChatSelection,
-    handleDeleteChat
+    currentConvo
 }) => {
-  return (
-    <div className="sidebar">
-      <button onClick={handleNewChat}>New Chat</button>
-      <div className="chat-list">
-        {chats.map(chat => (
-          <div
-            key={chat.CHAT_ID}
-            className={`chat-item ${chat.CHAT_ID === currentChatId ? 'active' : ''}`}
-            onClick={() => handleChatSelection(chat.CHAT_ID)}
-          >
-            <button onClick={() => handleDeleteChat(chat.CHAT_ID)} className = "delete-button">❌</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    const [conversations, setConversations] = useState<Conversation[]>([]);
+    const handleNewChat = () => {
+        
+    }
+    const handleDeleteChat = (id : number) => {
+
+    }
+    return (
+        <div className="sidebar">
+        <button onClick={handleNewChat}>New Chat</button>
+        <div className="chat-list">
+            {conversations.map(convo => (
+            <div
+                key={convo.CHAT_ID}
+                className={`chat-item ${currentConvo && convo.CHAT_ID === currentConvo.CHAT_ID ? 'active' : ''}`}
+                onClick={() => handleChatSelection(convo)}
+            >
+                <button onClick={() => handleDeleteChat(convo.CHAT_ID)} className = "delete-button">❌</button>
+            </div>
+            ))}
+        </div>
+        </div>
+    );
 };
 
 export default Sidebar;

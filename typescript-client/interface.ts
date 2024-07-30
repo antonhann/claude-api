@@ -14,6 +14,12 @@ export interface Chat {
     LAST_UPDATED_BY: string;
 }
 export interface ClaudeChat{
-    role: string,
-    content: string
+    role: string;
+    content: string;
+}
+export interface Conversation{
+    CHAT_ID: number
+    BOT_ID: number;
+    FROM_USER_ID: string;
+    TO_USER_ID: string;
 }

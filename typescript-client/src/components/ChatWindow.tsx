@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/ChatWindow.css';
-import { Chat } from '../../interface';
+import { Chat, Conversation } from '../../interface';
 
 interface ChatWindowProps{
-    currentChat : Chat | undefined,
+    currentChat : Conversation | undefined,
 }
 
 const ChatWindow : React.FC<ChatWindowProps> = ({ currentChat } ) => {
