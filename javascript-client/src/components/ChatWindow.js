@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/ChatWindow.css';
 
-const ChatWindow = ({ currentChat }) => {
+const ChatWindow = ({
+  currentConvo
+ }) => {
+  const [messageWindow, setMessageWindow] = useState(5);
   return (
     <div className="chat-window">
       <div className="messages">
-        {currentChat ? (
+        {currentConvo ? 
           //complete display task
-          <div>There exists a chat</div>
-        ) : (
+          currentConvo.slice(0,messageWindow).map(chat => {
+            return(
+              <div
+                key={chat.CHAT_ID}
+              >
+                <div>{chat.CHAT_PROMPT}</div>
+                <div>{chat.CHAT_RESPONSE}</div>
+              </div>
+            )
+          })
+         : (
           <div>Select a chat to view messages</div>
         )}
       </div>

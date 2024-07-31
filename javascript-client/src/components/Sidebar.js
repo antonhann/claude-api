@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/Sidebar.css';
 
-const Sidebar = ({ handleConvoSelection, currentConvo }) => {
-  const [converstations, setConversations] = useState([])
+const Sidebar = ({ 
+  handleConvoSelection,
+  conversations,
+  currentConvo,
+  userID,
+  handleUserIDChange,
+  handleUserIDKeyDown
+  }) => {
   const handleNewConvo = () => {
 
   }
@@ -12,17 +18,25 @@ const Sidebar = ({ handleConvoSelection, currentConvo }) => {
   return (
     <div className="sidebar">
       <button onClick={() => handleNewConvo()}>New Chat</button>
+      <input
+        value={userID}
+        onChange={(e) => handleUserIDChange(e)}
+        placeholder={"Press enter after USER ID"}
+        onKeyDown={(e) => handleUserIDKeyDown(e)}
+      ></input>
       <div className="chat-list">
-        {converstations.map(chat => (
-          <div
-            key={chat.id}
-            className={`chat-item ${currentConvo && chat.id === currentConvo.ID ? 'active' : ''}`}
-            onClick={() => handleConvoSelection(chat.id)}
-          >
-            {chat.name}
-            <button onClick={() => handleDeleteConvo(chat.id)} className = "delete-button">❌</button>
-          </div>
-        ))}
+        {conversations.map(convo => {
+          return(
+            <div
+              key={convo._id}
+              className={`chat-item`}
+              onClick={() => handleConvoSelection(convo.BOT_ID)}
+            >
+              Bot ID: {convo.BOT_ID}
+              <button onClick={() => handleDeleteConvo(convo.BOT_ID)} className = "delete-button">❌</button>
+            </div>
+          )
+        })}
       </div>
     </div>
   );
