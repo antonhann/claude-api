@@ -5,7 +5,7 @@ import '../styles/ChatApp.css';
 
 const ChatApp = () => {
   const [currentConvo, setCurrentConvo] = useState(undefined);
-
+  const [currentUser, setCurrentUser] = useState(89);
   const handleChatSelection = (currentConvo) => {
     setCurrentConvo(currentConvo);
   };
