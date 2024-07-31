@@ -6,11 +6,8 @@ const ChatWindow = ({ currentChat }) => {
     <div className="chat-window">
       <div className="messages">
         {currentChat ? (
-          currentChat.messages.map((msg, index) => (
-            <div key={index} className="message">
-              {msg}
-            </div>
-          ))
+          //complete display task
+          <div>There exists a chat</div>
         ) : (
           <div>Select a chat to view messages</div>
         )}
