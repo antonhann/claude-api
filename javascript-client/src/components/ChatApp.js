@@ -12,7 +12,6 @@ const ChatApp = () => {
   const handleConvoSelection = (botID) => {
     const getHistory = async () => {
       const chats = await fetchHistory(botID,finalUserID)
-      console.log(chats)
       setCurrentConvo(chats);
       return chats;
     }
@@ -22,7 +21,7 @@ const ChatApp = () => {
     setUserID(e.target.value)
   }
   const handleUserIDKeyDown = (e) => {
-    if(e.key == "Enter"){
+    if(e.key === "Enter"){
       setFinalUserID(userID)
     }
   }

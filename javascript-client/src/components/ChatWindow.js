@@ -12,12 +12,16 @@ const ChatWindow = ({
           //complete display task
           currentConvo.slice(0,messageWindow).map(chat => {
             return(
-              <div
-                key={chat.CHAT_ID}
-              >
-                <div>{chat.CHAT_PROMPT}</div>
-                <div>{chat.CHAT_RESPONSE}</div>
-              </div>
+                <>
+                  <MessageBubble
+                    message={chat.CHAT_PROMPT}
+                    fromUser={true}
+                  />
+                  <MessageBubble
+                    message={chat.CHAT_RESPONSE}
+                    fromUser={false}
+                  />
+                </>
             )
           })
          : (
@@ -33,5 +37,16 @@ const ChatWindow = ({
     </div>
   );
 };
+
+const MessageBubble = ({
+  message,
+  fromUser
+}) => {
+  return(
+    <div
+      className={`message ${fromUser ? "user-message" : "bot-message"}`}
+    >{message}</div>
+  )
+}
 
 export default ChatWindow;
