@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/ChatWindow.css';
 
 const ChatWindow = ({
-  currentConvo
+  currentConvo,
+  sendMessage
  }) => {
   const [messageWindow, setMessageWindow] = useState(5);
+  const [message, setMessage] = useState("")
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  }
+
+
   return (
     <div className="chat-window">
       <div className="messages">
@@ -29,10 +37,18 @@ const ChatWindow = ({
         )}
       </div>
       <div className="chat-bar">
-        <input type="text" placeholder="Type a message..." />
+        <input 
+        type="text" 
+        placeholder="Type a message..." 
+        value={message}
+        onChange={(e) => handleMessageChange(e)}
+        />
         <input type="file" id="file-upload" style={{ display: 'none' }} />
         <label htmlFor="file-upload" className="upload-button">📎</label>
-        <button className="send-button">Send</button>
+        <button 
+        className="send-button"
+        onClick={sendMessage()}
+        >Send</button>
       </div>
     </div>
   );

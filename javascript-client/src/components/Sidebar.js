@@ -10,7 +10,7 @@ const Sidebar = ({
   handleUserIDKeyDown
   }) => {
   const handleNewConvo = () => {
-
+    
   }
   const handleDeleteConvo = (id) => {
 

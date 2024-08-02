@@ -38,6 +38,30 @@ export const fetchConvo = async(userId) => {
     }
 }
 /*
+    @brief: check if bot exists in the database
+    @params: int of botID
+    @return: returns boolean if bot exists or not
+*/
+export const existBot = async(botID) => {
+    try{
+        const response = await fetch(`http://www.onezeus.com:3000/bots`);
+        if(!response.ok){
+            throw new Error("network response was not okay")
+        }
+        const bots = await response.json();
+        for(let i = 0; i < bots.length; i++){
+            if(bots.BOT_ID == botID){
+                return true;
+            }
+        }
+        return false
+    }
+    catch(error){
+        console.error("there was a problem validating bot id")
+    }
+}
+
+/*
     @brief: retrieves chat history of the user and bot from the database
     @params: int of botID, int of UserID
     @return: returns array the database's chat history between the bot and the user
@@ -86,4 +110,7 @@ const getData = async () => {
     }
 };
 
+const sendMessage = async() => {
+    
+}
 // getData();
