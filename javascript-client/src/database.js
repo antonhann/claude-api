@@ -13,6 +13,9 @@
     @params: int of the user's id
     @return: returns array the most recent messages of all the unique conversations
 */
+import pkg from './claude.cjs';
+const { sendMessage } = pkg;
+
 export const fetchConvo = async(userId) => {
     try{
         //retrieve all the bot lists
@@ -50,7 +53,7 @@ export const existBot = async(botID) => {
         }
         const bots = await response.json();
         for(let i = 0; i < bots.length; i++){
-            if(bots.BOT_ID == botID){
+            if(bots.BOT_ID === botID){
                 return true;
             }
         }
@@ -110,7 +113,8 @@ const getData = async () => {
     }
 };
 
-const sendMessage = async() => {
-    
+export const updateMessage = async(convo, message) => {
+
 }
+
 // getData();

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/ChatWindow.css';
+// import ButtonUsage from './ButtonUsage.js';
 
 const ChatWindow = ({
   currentConvo,
@@ -47,7 +48,7 @@ const ChatWindow = ({
         <label htmlFor="file-upload" className="upload-button">📎</label>
         <button 
         className="send-button"
-        onClick={sendMessage()}
+        onClick={() => sendMessage()}
         >Send</button>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ChatSidebar from './Sidebar';
-import ChatWindow from './ChatWindow';
+import ChatSidebar from './Sidebar.js';
+import ChatWindow from './ChatWindow.js';
 import '../styles/ChatApp.css';
-import {fetchConvo, fetchHistory} from "../database";
+import {fetchConvo, fetchHistory, updateMessage} from "../database.js";
 const ChatApp = () => {
   
   const [currentConvo, setCurrentConvo] = useState(undefined);
@@ -30,7 +30,10 @@ const ChatApp = () => {
   }
 
   const sendMessage = (message) => {
-    
+    const update = async () => {
+      
+    }
+    update()
   }
 
 
