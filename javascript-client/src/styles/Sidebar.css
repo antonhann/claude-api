@@ -1,24 +1,44 @@
 .sidebar {
-    width: 250px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-right: 1px solid #ddd;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
-  
-  .new-chat-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-  }
+  width: 250px;
+  background-color: #f8f9fa; 
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+  overflow-y: auto; /* Scrolls if too much content */
+}
 
-.delete-button{
+.new-chat-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #007bff; 
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px; 
+  transition: background-color 0.3s ease; 
+}
+
+.new-chat-button:hover, 
+.new-chat-button:focus {
+  background-color: #0056b3; 
+  outline: none; 
+}
+
+.delete-button {
   float: right;
+  background: transparent;
+  border: none;
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-button:hover, 
+.delete-button:focus {
+  color: #dc3545; 
 }

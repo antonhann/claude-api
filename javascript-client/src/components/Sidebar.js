@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../styles/Sidebar.css';
+import ButtonUsage from './ButtonUsage';
 
 const Sidebar = ({ 
   handleConvoSelection,
@@ -17,7 +18,7 @@ const Sidebar = ({
   }
   return (
     <div className="sidebar">
-      <button onClick={() => handleNewConvo()}>New Chat</button>
+      <ButtonUsage message = "New Chat" onClick={() => handleNewConvo()}/>
       <input
         value={userID}
         onChange={(e) => handleUserIDChange(e)}

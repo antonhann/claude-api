@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/ChatWindow.css';
+import ButtonUsage from './ButtonUsage';
 
 const ChatWindow = ({
   currentConvo
