@@ -113,8 +113,33 @@ const getData = async () => {
     }
 };
 
-export const updateMessage = async(convo, message) => {
-
+export const storeConversation = async(userID, prompt, aiResponse, context) => {
+    try{
+        const date = new Date();
+        const formattedDate = date.toISOString().replace('Z', '+00:00');
+        const response = await fetch(`http://www.onezeus.com:3000/chatsdmlpost`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                CHAT_PROMPT: prompt,
+                CHAT_RESPONSE: aiResponse,
+                AI_MODEL: "Claude",
+                FROM_USER_ID: userID,
+                TO_USER_ID: userID,
+                BOT_ID: 31,
+                CONTEXT: context,
+                CREATION_DATE: formattedDate,
+                CREATED_BY: "Claude Team",
+                LAST_UPDATE_DATE: formattedDate,
+                LAST_UPDATED_BY: "Claude Team"
+            })
+        })
+        console.log(response);
+    }
+    catch(error){
+        throw new Error('Error sending conversation:', error)
+    }
 }
-
 // getData();
