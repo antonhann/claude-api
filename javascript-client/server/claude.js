@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 
 const anthropic = new Anthropic({
-  apiKey: "",
+  apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
 const sendMessage = async(history, message) => {
@@ -15,6 +15,8 @@ const sendMessage = async(history, message) => {
     max_tokens: 1024,
     messages: history,
   });
+
+  
   return msg
 }
 
