@@ -5,6 +5,7 @@ import '../styles/ChatWindow.css';
 const ChatWindow = ({
   currentConvo,
   botID,
+  botModel,
   userID,
   handleConvoSelection
  }) => {
@@ -20,7 +21,6 @@ const ChatWindow = ({
     }
     const update = async () => {
       try{
-        console.log(message)
         const response = await fetch("http://localhost:5000/api/send-message", {
           method: "POST",
             headers: {
@@ -38,7 +38,6 @@ const ChatWindow = ({
           throw new Error(`Error: ${response.status} ${response.statusText} - ${errorText}`);
         }
         const responseData = await response.json();
-        console.log('Response data:', responseData);
         return responseData
       }
       catch(error){
@@ -47,7 +46,6 @@ const ChatWindow = ({
     }
     try {
       const responseData = await update();
-      console.log(responseData)
       if (responseData) {
         handleConvoSelection(botID); // Call handleConvoSelection only after update is complete
         setMessage("")
@@ -56,7 +54,11 @@ const ChatWindow = ({
       console.error("Error in sendMessage function", error);
     }
   }
-
+  const handleMessageKeyDown = (e) =>{
+    if(e.key === "Enter"){
+      sendMessage(message)
+    }
+  }
   return (
     <div className="chat-window">
       <div className="messages-window">
@@ -86,6 +88,7 @@ const ChatWindow = ({
         placeholder="Type a message..." 
         value={message}
         onChange={(e) => handleMessageChange(e)}
+        onKeyDown={(e) => handleMessageKeyDown(e)}
         />
         <input type="file" id="file-upload" style={{ display: 'none' }} />
         <label htmlFor="file-upload" className="upload-button">📎</label>
