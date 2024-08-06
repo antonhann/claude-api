@@ -1,4 +1,4 @@
-const Anthropic = require('@anthropic-ai/sdk');
+import Anthropic from "@anthropic-ai/sdk"
 
 const anthropic = new Anthropic({
   apiKey: "",
@@ -8,7 +8,8 @@ const sendMessage = async(history, message) => {
   history.push({
     role: "user",
     content: message
-})
+  })
+  console.log(history)
   const msg = await anthropic.messages.create({
     model: "claude-3-haiku-20240307",
     max_tokens: 1024,
@@ -17,4 +18,4 @@ const sendMessage = async(history, message) => {
   return msg
 }
 
-module.exports = {sendMessage} 
+export default sendMessage

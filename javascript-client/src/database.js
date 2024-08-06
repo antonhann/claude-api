@@ -13,8 +13,6 @@
     @params: int of the user's id
     @return: returns array the most recent messages of all the unique conversations
 */
-import pkg from './claude.cjs';
-const { sendMessage } = pkg;
 
 export const fetchConvo = async(userId) => {
     try{
@@ -85,25 +83,25 @@ export const fetchHistory = async (botId ,userId) => {
         throw error;
     }
 }
-/*
-    @brief: convert the database's chat history into format claudeAI accepts
-    @params: array of the database chat history between userID and botID
-    @return: returns array of claude formatted history 
-*/
-export const getClaudeHistory = (data) => {
-    let history = []
-    for(let i = 0; i < data.length; i++){
-        history.push({
-            role: "user",
-            content: data[i].CHAT_PROMPT
-        })
-        history.push({
-            role: "assistant",
-            content: data[i].CHAT_RESPONSE
-        })
-    }
-    return history;
-}
+// /*
+//     @brief: convert the database's chat history into format claudeAI accepts
+//     @params: array of the database chat history between userID and botID
+//     @return: returns array of claude formatted history 
+// */
+// export const getClaudeHistory = (data) => {
+//     let history = []
+//     for(let i = 0; i < data.length; i++){
+//         history.push({
+//             role: "user",
+//             content: data[i].CHAT_PROMPT
+//         })
+//         history.push({
+//             role: "assistant",
+//             content: data[i].CHAT_RESPONSE
+//         })
+//     }
+//     return history;
+// }
 const getData = async () => {
     try {
         let conversations = await fetchConvo(89);
@@ -113,8 +111,58 @@ const getData = async () => {
     }
 };
 
-export const updateMessage = async(convo, message) => {
-
-}
-
+// export const updateMessage = async(userID, convo, message) => {
+//     //get context
+//     console.log(sendMessage)
+//     let context;
+//     if (convo.length == 0){
+//         try{
+//             let response = await fetch("http://www.onezeus.com:3000/GenerateUUID")
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             context = await response.json().UUID
+//         }
+//         catch(error){
+//             console.error("there was a problem fetching the new context", error)
+//             throw error
+//         }
+//     }else{
+//         context = convo[0].CONTEXT
+//     }
+//     return
+//     let history = getClaudeHistory(convo);
+//     console.log(history)
+//     let aiResponse = await sendMessage(history, message)
+//     await storeConversation(userID, message, aiResponse.content[0].text, context)
+// }
+// export const storeConversation = async(userID, prompt, aiResponse, context) => {
+//     try{
+//         const date = new Date();
+//         const formattedDate = date.toISOString().replace('Z', '+00:00');
+//         const response = await fetch(`http://www.onezeus.com:3000/chatsdmlpost`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 CHAT_PROMPT: prompt,
+//                 CHAT_RESPONSE: aiResponse,
+//                 AI_MODEL: "Claude",
+//                 FROM_USER_ID: userID,
+//                 TO_USER_ID: userID,
+//                 BOT_ID: 31,
+//                 CONTEXT: context,
+//                 CREATION_DATE: formattedDate,
+//                 CREATED_BY: "Claude Team",
+//                 LAST_UPDATE_DATE: formattedDate,
+//                 LAST_UPDATED_BY: "Claude Team"
+//             })
+//         })
+//         console.log(response);
+//     }
+//     catch(error){
+//         throw new Error('Error sending conversation:', error)
+//     }
+// }
 // getData();

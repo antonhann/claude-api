@@ -6,7 +6,16 @@
   height: 100vh;
   box-sizing: border-box;
   background-color: #f4f4f4; 
-  overflow: hidden; 
+}
+
+.messages-window {
+  flex: 1; /* Takes up available space */
+  padding: 10px;
+  overflow-y: auto; /* Allow vertical scrolling */
+  display: flex;
+  flex-direction: column-reverse; /* New messages appear at the bottom */
+  gap: 15px;
+  margin-bottom: 0; /* Remove margin to avoid pushing messages up */
 }
 
 .chat-bar {
@@ -18,7 +27,9 @@
   bottom: 0;
   align-items: center;
   border-radius: 10px;
+  z-index: 1; /* Ensure it stays above the messages */
 }
+
 
 input[type="text"] {
   flex: 1;
@@ -53,17 +64,6 @@ input[type="text"] {
 
 .upload-button:hover, .send-button:hover {
   background-color: #0056b3; 
-}
-
-.messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 15px; 
-  margin-bottom: 20px; 
 }
 
 .message {
