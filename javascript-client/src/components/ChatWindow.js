@@ -16,7 +16,7 @@ const ChatWindow = ({
     setMessage(e.target.value);
   }
   const sendMessage = async (message) => {
-    if (botID !== 31){
+    if (botModel !== "Claude"){
       return
     }
     const update = async () => {
