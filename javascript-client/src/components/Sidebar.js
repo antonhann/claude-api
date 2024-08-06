@@ -31,7 +31,7 @@ const Sidebar = ({
             <div
               key={convo._id}
               className={`chat-item`}
-              onClick={() => handleConvoSelection(convo.BOT_ID)}
+              onClick={() => handleConvoSelection(convo.BOT_ID, convo.AI_MODEL)}
             >
               Bot ID: {convo.BOT_ID}
               <button onClick={() => handleDeleteConvo(convo.BOT_ID)} className = "delete-button">❌</button>

@@ -102,14 +102,6 @@ export const fetchHistory = async (botId ,userId) => {
 //     }
 //     return history;
 // }
-const getData = async () => {
-    try {
-        let conversations = await fetchConvo(89);
-        console.log(conversations);
-    } catch (error) {
-        // Handle the error as needed
-    }
-};
 
 // export const updateMessage = async(userID, convo, message) => {
 //     //get context

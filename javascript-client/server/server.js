@@ -14,7 +14,6 @@ app.use(express.json());
 app.post('/api/send-message', async (req, res) => {
     try {
       const { userID, convo, message } = req.body;
-      console.log(userID,convo,message)
       let context;
       if (convo.length === 0) {
         try {
@@ -32,7 +31,6 @@ app.post('/api/send-message', async (req, res) => {
         context = convo[0].CONTEXT;
       }
       const history = getClaudeHistory(convo);
-      console.log("Formatted history:", message);
       const aiResponse = await sendMessage(history, message);
       const response = await storeConversation(userID, message, aiResponse.content[0].text, context);
   

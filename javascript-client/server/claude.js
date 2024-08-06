@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: "",
 });
 
 const sendMessage = async(history, message) => {
@@ -9,7 +9,6 @@ const sendMessage = async(history, message) => {
     role: "user",
     content: message
   })
-  console.log(history)
   const msg = await anthropic.messages.create({
     model: "claude-3-haiku-20240307",
     max_tokens: 1024,
