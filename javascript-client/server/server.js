@@ -12,34 +12,36 @@ const port = process.env.port || 5000;
 app.use(express.json());
 
 app.post('/api/send-message', async (req, res) => {
-    try {
-      const { userID, convo, message } = req.body;
-      let context;
-      if (convo.length === 0) {
-        try {
-          const response = await fetch("http://www.onezeus.com:3000/GenerateUUID");
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const data = await response.json();
-          context = data.UUID;
-        } catch (error) {
-          console.error("There was a problem fetching the new context", error);
-          throw error;
+  try {
+    const { userID, convo, message, image } = req.body;
+    console.log(userID,convo,message)
+    let context;
+    if (convo.length === 0) {
+      try {
+        const response = await fetch("http://www.onezeus.com:3000/GenerateUUID");
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-      } else {
-        context = convo[0].CONTEXT;
+        const data = await response.json();
+        context = data.UUID;
+      } catch (error) {
+        console.error("There was a problem fetching the new context", error);
+        throw error;
       }
-      const history = getClaudeHistory(convo);
-      const aiResponse = await sendMessage(history, message);
-      const response = await storeConversation(userID, message, aiResponse.content[0].text, context);
-  
-      res.json(response);
-    } catch (error) {
-      console.error("Error in /api/send-message:", error);
-      res.status(500).json({ error: error.message });
+    } else {
+      context = convo[0].CONTEXT;
     }
-  });
+    const history = getClaudeHistory(convo);
+    console.log("Formatted history:", message);
+    const aiResponse = await sendMessage(history, message, image);
+    const response = await storeConversation(userID, message, aiResponse.content[0].text, context);
+
+    res.json(response);
+  } catch (error) {
+    console.error("Error in /api/send-message:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 /*
     @brief: convert the database's chat history into format claudeAI accepts

@@ -10,13 +10,34 @@ const ChatWindow = ({
   handleConvoSelection
  }) => {
   const [messageWindow, setMessageWindow] = useState(5);
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
+  const [selectedFile, setSelectedFile] = useState([]);
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
   }
-  const sendMessage = async (message) => {
-    if (botModel !== "Claude"){
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+  try {
+    const base64 = await fileToBase64(file);
+    setSelectedFile((oldImages) => [...oldImages, base64]);
+    console.log(base64);
+  } catch (error) {
+    console.error('Error converting file to Base64:', error);
+  }
+};
+
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => resolve(reader.result.split(',')[1]); // Remove the data URL prefix
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const sendMessage = async (message, selectedFile) => {
+    if (botID !== 31){
       return
     }
     const update = async () => {
@@ -29,7 +50,8 @@ const ChatWindow = ({
             body: JSON.stringify({
               userID: userID,
               convo: currentConvo,
-              message: message
+              message: message,
+              image: selectedFile
             })
         })
         if (!response.ok) {
@@ -49,6 +71,7 @@ const ChatWindow = ({
       if (responseData) {
         handleConvoSelection(botID); // Call handleConvoSelection only after update is complete
         setMessage("")
+        setSelectedFile([]);
       }
     } catch (error) {
       console.error("Error in sendMessage function", error);
@@ -90,11 +113,11 @@ const ChatWindow = ({
         onChange={(e) => handleMessageChange(e)}
         onKeyDown={(e) => handleMessageKeyDown(e)}
         />
-        <input type="file" id="file-upload" style={{ display: 'none' }} />
+        <input type="file" id="file-upload" style={{ display: 'none' }} onChange = {handleFileChange}/>
         <label htmlFor="file-upload" className="upload-button">📎</label>
         <button 
         className="send-button"
-        onClick={() => sendMessage(message)}
+        onClick={() => sendMessage(message, selectedFile)}
         >Send</button>
       </div>
     </div>
