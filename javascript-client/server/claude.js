@@ -3,7 +3,7 @@ import { promises as fs } from 'fs'
 import path from 'path';
 
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+  apiKey: "",
 });
 
   const sendMessage = async (history, message, imageFiles) => {
