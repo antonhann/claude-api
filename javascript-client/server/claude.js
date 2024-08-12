@@ -7,54 +7,52 @@ const anthropic = new Anthropic({
 });
 
   const sendMessage = async (history, message, imageFiles) => {
-    // Update the chat history
-    history.push({
+    let newMessage = {
       role: "user",
-      content: message
-    });
-  
+      content: [{
+        type: "text",
+        text: message
+      }]
+    }
     //Create a messages array
     //First add the text prompt to the array
     try {
-      const messages = [{
-        type: "text",
-        text: message,
-      }];
-
-      //If there is at least one image inputted, iterate through each and add it to messages 
+      //If there is at least one image inputted, iterate through each and add to the images array 
       if (imageFiles && imageFiles.length > 0) {
         imageFiles.forEach((base64) => {
-          messages.push({
-            type: "image",
-            source: {
-              type: "base64",
-              media_type: "image/png",
-              data: base64,
-            },
+          newMessage.content.push({
+              type: "image",
+              source: {
+                type: "base64",
+                media_type: base64.imageType,
+                data: base64.base64Data,
+              },
           });
         });
+        //Pushes the inputted images and prompt to the history array
+        history.push(newMessage);
       }
-    console.log(messages);
-  
+      else{
+        //If there are no images, simply add the message to the history array
+        history.push(newMessage);
+      }
+      // history.forEach((e) => {
+      //   console.log(e.content);
+      // })
       // Send the message using anthropic API
       const msg = await anthropic.messages.create({
-        messages: [
-          {
-            role: "user",
-            content: messages,
-          },
-        ],
-        max_tokens: 1024,
+        messages: history,
+        max_tokens: 4096,
         model: "claude-3-5-sonnet-20240620",
       });
-      console.log(msg);
+      //console.log(msg);
       
       return msg;
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
-// const sendMessage = async(history, message) => {
+// const testSendMessage = async(history, message) => {
 //   history.push({
 //     role: "user",
 //     content: message

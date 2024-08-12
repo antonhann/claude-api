@@ -32,7 +32,7 @@ app.post('/api/send-message', async (req, res) => {
       context = convo[0].CONTEXT;
     }
     const history = getClaudeHistory(convo);
-    console.log("Formatted history:", message);
+    console.log("Formatted history:", history);
     const aiResponse = await sendMessage(history, message, image);
     const response = await storeConversation(userID, message, aiResponse.content[0].text, context);
 
@@ -53,11 +53,11 @@ export const getClaudeHistory = (data) => {
     for(let i = 0; i < data.length; i++){
         history.push({
             role: "user",
-            content: data[i].CHAT_PROMPT
+            content: [{type: "text", text: data[i].CHAT_PROMPT}]
         })
         history.push({
             role: "assistant",
-            content: data[i].CHAT_RESPONSE
+            content: [{type: "text", text: data[i].CHAT_RESPONSE}]
         })
     }
     return history;
