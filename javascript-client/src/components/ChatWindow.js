@@ -57,7 +57,7 @@ const ChatWindow = ({
             },
             body: JSON.stringify({
               userID: userID,
-              convo: currentConvo,
+              convo: currentConvo.reverse(),
               message: message,
               image: selectedFile
             })

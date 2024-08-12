@@ -76,7 +76,7 @@ export const fetchHistory = async (botId ,userId) => {
         }
         const history = await response.json()
         //return the array where the recent messages are first
-        return (history).reverse();
+        return history.reverse();
     }
     catch (error){
         console.error("there was a problem with fetching the chat history", error);
